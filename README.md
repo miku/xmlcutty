@@ -22,6 +22,7 @@ $ cat fixtures/sample.xml
         </c>
     </b>
 </a>
+```
 
 $ xmlcutty -h
 Usage of xmlcutty:
@@ -33,6 +34,9 @@ Usage of xmlcutty:
         synthetic root element
   -v    show version
 
+It looks a bit like [xpath](https://en.wikipedia.org/wiki/XPath).
+
+```sh
 $ xmlcutty -path /a fixtures/sample.xml
 <a>
     <b>
@@ -44,6 +48,9 @@ $ xmlcutty -path /a fixtures/sample.xml
         </c>
     </b>
 </a>
+```
+
+But it can only specify the target element, relative to the root.
 
 $ xmlcutty -path /a/b fixtures/sample.xml
 <b>
@@ -55,7 +62,8 @@ $ xmlcutty -path /a/b fixtures/sample.xml
     </b>
 ```
 
-Make [xmllint](http://xmlsoft.org/xmllint.html) a bit happier:
+Make [xmllint](http://xmlsoft.org/xmllint.html) a bit happier, by adding a
+synthetic root element:
 
 ```sh
 $ xmlcutty -root hello -path /a/b fixtures/sample.xml | xmllint --format -
