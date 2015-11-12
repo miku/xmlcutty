@@ -84,7 +84,10 @@ func main() {
 			fifo.Push(e.Name.Local)
 			if *path == fifo.String() {
 				var dummy Dummy
-				decoder.DecodeElement(&dummy, &e)
+				err := decoder.DecodeElement(&dummy, &e)
+				if err != nil {
+					log.Fatal(err)
+				}
 				fifo.Pop()
 				fmt.Print(wrapper)
 				fmt.Print(string(dummy.Text))
