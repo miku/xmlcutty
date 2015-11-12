@@ -56,8 +56,8 @@ $ xmlcutty -path /a fixtures/sample.xml
 </a>
 ```
 
-But it can only interpret the target element, relative to the root. We not
-even support extracting text. There are other tools for that.
+But it can only interpret the target element, relative to the root. <strike>We not
+even support extracting text</strike>. There are other tools for that.
 
 ```sh
 $ xmlcutty -path /a/b fixtures/sample.xml
