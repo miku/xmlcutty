@@ -5,7 +5,7 @@ README
 
 xmlcutty is a dead simple tool for carving out elements from *large* XML files and not much else.
 
-Anecdata: Processes a 2G XML file with almost no memory in less than three minutes.
+Anecdata: Processes a 2G XML file with almost no memory in less than three minutes. [Background](http://stackoverflow.com/q/33653844/89391).
 
 Usage
 -----
@@ -147,7 +147,7 @@ We can go a bit further, with something like a poor man's XPath `text()`
 extraction:
 
 ```sh
-$ cat fixtures/oai.xml | ./xmlcutty -rename '\n' -path /record/metadata/dc/identifier \
+$ cat fixtures/oai.xml | xmlcutty -rename '\n' -path /record/metadata/dc/identifier \
                        | grep -v "^$"
 http://arxiv.org/abs/0704.0004
 http://arxiv.org/abs/0704.0010
