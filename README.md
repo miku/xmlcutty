@@ -26,8 +26,7 @@ $ cat fixtures/sample.xml
 
 Options:
 
-sh
-```
+```sh
 $ xmlcutty -h
 Usage of xmlcutty:
   -path string
@@ -58,7 +57,7 @@ $ xmlcutty -path /a fixtures/sample.xml
 But it can only interpret the target element, relative to the root. We not
 even support extracting text. There are other tools for that.
 
-```
+```sh
 $ xmlcutty -path /a/b fixtures/sample.xml
 <b>
         <c>
