@@ -14,7 +14,7 @@ import (
 	"github.com/miku/xmlcutty"
 )
 
-const Version = "0.1.0"
+const Version = "0.1.1"
 
 type Dummy struct {
 	Text []byte `xml:",innerxml"`
