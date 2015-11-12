@@ -29,6 +29,8 @@ Options:
 ```sh
 $ xmlcutty -h
 Usage of xmlcutty:
+  -delete
+        delete wrapper element
   -path string
         select path (default "/")
   -rename string
