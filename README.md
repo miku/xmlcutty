@@ -1,7 +1,7 @@
 README
 ======
 
-> The game ain't in me no more. None of it.
+> The game ain't in me no more. [None of it](https://www.youtube.com/watch?v=h7yf8Vp2KAI&feature=youtu.be&t=1m46s).
 
 xmlcutty is a dead simple tool for carving out elements from *large* XML files and not much else.
 
