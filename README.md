@@ -127,7 +127,8 @@ $ head fixtures/oai.xml
  <dc:title>A determinant of Stirling cycle numbers counts unlabeled acyclic
   single-source automata</dc:title>
 
-$ cat fixtures/oai.xml | xmlcutty -root x -path /record/metadata/dc/identifier | xmllint --format -
+$ cat fixtures/oai.xml | xmlcutty -root x -path /record/metadata/dc/identifier \
+                       | xmllint --format -
 <?xml version="1.0"?>
 <x>
   <identifier>http://arxiv.org/abs/0704.0004</identifier>
