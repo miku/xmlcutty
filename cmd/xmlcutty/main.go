@@ -62,6 +62,8 @@ func main() {
 		wrapper = fmt.Sprintf("<%s>", lastElement(*path))
 	case "\\n":
 		wrapper = "\n"
+	case " ":
+		wrapper = " "
 	default:
 		wrapper = fmt.Sprintf("<%s>", *rename)
 	}
