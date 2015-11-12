@@ -24,6 +24,10 @@ $ cat fixtures/sample.xml
 </a>
 ```
 
+Options:
+
+sh
+```
 $ xmlcutty -h
 Usage of xmlcutty:
   -path string
@@ -33,8 +37,9 @@ Usage of xmlcutty:
   -root string
         synthetic root element
   -v    show version
+```
 
-It looks a bit like [xpath](https://en.wikipedia.org/wiki/XPath).
+It looks a bit like [XPath](https://en.wikipedia.org/wiki/XPath).
 
 ```sh
 $ xmlcutty -path /a fixtures/sample.xml
@@ -50,8 +55,10 @@ $ xmlcutty -path /a fixtures/sample.xml
 </a>
 ```
 
-But it can only specify the target element, relative to the root.
+But it can only interpret the target element, relative to the root. We not
+even support extracting text. There are other tools for that.
 
+```
 $ xmlcutty -path /a/b fixtures/sample.xml
 <b>
         <c>
