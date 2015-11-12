@@ -127,7 +127,12 @@ $ head fixtures/oai.xml
 <metadata>
  <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"... >
  <dc:title>A determinant of Stirling cycle numbers counts ...
+```
 
+This is an example XML response from a web service. We can slice out the
+identifier elements (note, namespaces are ignored):
+
+```sh
 $ cat fixtures/oai.xml | xmlcutty -root x -path /record/metadata/dc/identifier \
                        | xmllint --format -
 <?xml version="1.0"?>
@@ -138,7 +143,8 @@ $ cat fixtures/oai.xml | xmlcutty -root x -path /record/metadata/dc/identifier \
 </x>
 ```
 
-Poor man's XPath `text()` extraction:
+We can go a bit further, with something like a poor man's XPath `text()`
+extraction:
 
 ```sh
 $ cat fixtures/oai.xml | ./xmlcutty -rename '\n' -path /record/metadata/dc/identifier \
