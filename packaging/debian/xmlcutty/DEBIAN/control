@@ -1,0 +1,9 @@
+Package: xmlcutty
+Version: 0.1.0
+Section: utils
+Priority: optional
+Architecture: amd64
+Essential: no
+Depends: libc6 (>= 2.12)
+Maintainer: Martin Czygan
+Description: Carve out subelements from large XML files with xpathish queries.
