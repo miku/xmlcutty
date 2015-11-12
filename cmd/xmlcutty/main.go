@@ -56,16 +56,20 @@ func main() {
 	fifo := xmlcutty.StringFifo{}
 	decoder := xml.NewDecoder(reader)
 
-	var wrapper string
+	var opener, closer string
 	switch *rename {
 	case "":
-		wrapper = fmt.Sprintf("<%s>", lastElement(*path))
+		opener = "<" + lastElement(*path) + ">"
+		closer = "</" + lastElement(*path) + ">"
 	case "\\n":
-		wrapper = "\n"
+		opener = "\n"
+		closer = ""
 	case " ":
-		wrapper = " "
+		opener = " "
+		closer = " "
 	default:
-		wrapper = fmt.Sprintf("<%s>", *rename)
+		opener = "<" + *rename + ">"
+		closer = "</" + *rename + ">"
 	}
 
 	if *root != "" {
@@ -89,9 +93,9 @@ func main() {
 					log.Fatal(err)
 				}
 				fifo.Pop()
-				fmt.Print(wrapper)
+				fmt.Print(opener)
 				fmt.Print(string(dummy.Text))
-				fmt.Print(wrapper)
+				fmt.Print(closer)
 			}
 		case xml.EndElement:
 			fifo.Pop()
