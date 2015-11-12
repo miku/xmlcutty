@@ -111,3 +111,27 @@ $ xmlcutty -root hi -rename beee -path /a/b/c fixtures/sample.xml | xmllint --fo
         </beee>
 </hi>
 ```
+
+It is even possible to parse XML files without a root element:
+
+```sh
+$ head fixtures/oai.xml
+<record>
+<header>
+ <identifier>oai:arXiv.org:0704.0004</identifier>
+ <datestamp>2007-05-23</datestamp>
+ <setSpec>math</setSpec>
+</header>
+<metadata>
+ <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+ <dc:title>A determinant of Stirling cycle numbers counts unlabeled acyclic
+  single-source automata</dc:title>
+
+$ cat fixtures/oai.xml | xmlcutty -root x -path /record/metadata/dc/identifier | xmllint --format -
+<?xml version="1.0"?>
+<x>
+  <identifier>http://arxiv.org/abs/0704.0004</identifier>
+  <identifier>http://arxiv.org/abs/0704.0010</identifier>
+  <identifier>http://arxiv.org/abs/0704.0012</identifier>
+</x>
+```
