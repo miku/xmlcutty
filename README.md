@@ -137,3 +137,12 @@ $ cat fixtures/oai.xml | xmlcutty -root x -path /record/metadata/dc/identifier \
   <identifier>http://arxiv.org/abs/0704.0012</identifier>
 </x>
 ```
+
+Poor man's XPath `text()` extraction:
+
+```sh
+$ cat fixtures/oai.xml | ./xmlcutty -rename '\n' -path /record/metadata/dc/identifier | grep -v "^$"
+http://arxiv.org/abs/0704.0004
+http://arxiv.org/abs/0704.0010
+http://arxiv.org/abs/0704.0012
+```
