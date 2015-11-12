@@ -55,7 +55,7 @@ $ xmlcutty -path /a/b fixtures/sample.xml
     </b>
 ```
 
-Make xmllint a bit happier:
+Make [xmllint](http://xmlsoft.org/xmllint.html) a bit happier:
 
 ```sh
 $ xmlcutty -root hello -path /a/b fixtures/sample.xml | xmllint --format -
