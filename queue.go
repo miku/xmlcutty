@@ -2,22 +2,22 @@ package xmlcutty
 
 import "strings"
 
-type StringFifo struct {
+type StringStack struct {
 	queue []string
 }
 
-func (q *StringFifo) Push(s string) {
+func (q *StringStack) Push(s string) {
 	q.queue = append(q.queue, s)
 }
 
-func (q *StringFifo) Top() string {
+func (q *StringStack) Top() string {
 	if len(q.queue) == 0 {
 		panic("Top from empty queue")
 	}
 	return q.queue[len(q.queue)-1]
 }
 
-func (q *StringFifo) Pop() string {
+func (q *StringStack) Pop() string {
 	if len(q.queue) == 0 {
 		panic("Pop from empty queue")
 	}
@@ -26,6 +26,6 @@ func (q *StringFifo) Pop() string {
 	return r
 }
 
-func (q *StringFifo) String() string {
+func (q *StringStack) String() string {
 	return "/" + strings.Join(q.queue, "/")
 }

@@ -53,7 +53,7 @@ func main() {
 		reader = file
 	}
 
-	fifo := xmlcutty.StringFifo{}
+	stack := xmlcutty.StringStack{}
 	decoder := xml.NewDecoder(reader)
 
 	var opener, closer string
@@ -85,20 +85,20 @@ func main() {
 		}
 		switch e := t.(type) {
 		case xml.StartElement:
-			fifo.Push(e.Name.Local)
-			if *path == fifo.String() {
+			stack.Push(e.Name.Local)
+			if *path == stack.String() {
 				var dummy Dummy
 				err := decoder.DecodeElement(&dummy, &e)
 				if err != nil {
 					log.Fatal(err)
 				}
-				fifo.Pop()
+				stack.Pop()
 				fmt.Print(opener)
 				fmt.Print(string(dummy.Text))
 				fmt.Print(closer)
 			}
 		case xml.EndElement:
-			fifo.Pop()
+			stack.Pop()
 		}
 	}
 	if *root != "" {

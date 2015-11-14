@@ -2,8 +2,8 @@ package xmlcutty
 
 import "testing"
 
-func TestStringFifo(t *testing.T) {
-	q := StringFifo{}
+func TestStringStack(t *testing.T) {
+	q := StringStack{}
 
 	want := "Hello"
 	q.Push(want)
@@ -38,14 +38,14 @@ func TestStringFifo(t *testing.T) {
 }
 
 func TestString(t *testing.T) {
-	q := StringFifo{}
+	q := StringStack{}
 	want := "/"
 	got := q.String()
 	if q.String() != want {
 		t.Errorf("got %s, want %s", got, want)
 	}
 
-	q = StringFifo{}
+	q = StringStack{}
 	q.Push("a")
 	q.Push("b")
 	q.Push("c")
