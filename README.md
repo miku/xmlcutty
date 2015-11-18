@@ -74,7 +74,7 @@ $ xmlcutty -path /a/b fixtures/sample.xml
 </b>
 ```
 
-You can end up with XML document without a root. To make tools like
+You can end up with an XML document without a root. To make tools like
 [xmllint](http://xmlsoft.org/xmllint.html) happy, you can add a
 synthetic root element on the fly:
 
