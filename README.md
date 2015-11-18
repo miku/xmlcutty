@@ -3,9 +3,9 @@ README
 
 > The game ain't in me no more. [None of it](https://www.youtube.com/watch?v=h7yf8Vp2KAI&feature=youtu.be&t=1m46s).
 
-xmlcutty is a dead simple tool for carving out elements from *large* XML files and not much else.
+xmlcutty is a simple tool for carving out elements from *large* XML files.
 
-Anecdata: Processes a 2G XML file with almost no memory in less than three minutes. [Background](http://stackoverflow.com/q/33653844/89391).
+Why? [Background](http://stackoverflow.com/q/33653844/89391).
 
 Usage
 -----
@@ -38,7 +38,8 @@ Usage of xmlcutty:
   -v    show version
 ```
 
-It looks a bit like [XPath](https://en.wikipedia.org/wiki/XPath).
+It *looks* a bit like [XPath](https://en.wikipedia.org/wiki/XPath), but it really
+is only a simple matcher.
 
 ```sh
 $ xmlcutty -path /a fixtures/sample.xml
@@ -54,35 +55,36 @@ $ xmlcutty -path /a fixtures/sample.xml
 </a>
 ```
 
-But it can only interpret the target element, relative to the root. <strike>We
-don't even support extracting text</strike>. There are other tools for that.
+You specify a path, e.g. `/a/b` and all elements matching this path are printed:
 
 ```sh
 $ xmlcutty -path /a/b fixtures/sample.xml
 <b>
-        <c>
-        </c>
-    </b><b>
-        <c>
-        </c>
-    </b>
+    <c>
+    </c>
+</b>
+<b>
+    <c>
+    </c>
+</b>
 ```
 
-Make [xmllint](http://xmlsoft.org/xmllint.html) a bit happier, by adding a
-synthetic root element:
+You can end up with XML document without a root. To make tools like
+[xmllint](http://xmlsoft.org/xmllint.html) happy, you can add a
+synthetic root element on the fly:
 
 ```sh
 $ xmlcutty -root hello -path /a/b fixtures/sample.xml | xmllint --format -
 <?xml version="1.0"?>
 <hello>
-  <b>
-    <c>
+    <b>
+        <c>
         </c>
-  </b>
-  <b>
-    <c>
+    </b>
+    <b>
+        <c>
         </c>
-  </b>
+    </b>
 </hello>
 ```
 
@@ -91,44 +93,47 @@ Rename wrapper element on the fly:
 ```sh
 $ xmlcutty -rename beee -path /a/b fixtures/sample.xml
 <beee>
-        <c>
-        </c>
-    </beee><beee>
-        <c>
-        </c>
-    </beee>
+    <c>
+    </c>
+</beee>
+<beee>
+    <c>
+    </c>
+</beee>
 ```
 
-All options:
+All options, synthetic root element and a renamed path element:
 
 ```sh
 $ xmlcutty -root hi -rename beee -path /a/b/c fixtures/sample.xml | xmllint --format -
 <?xml version="1.0"?>
 <hi>
-  <beee>
-        </beee>
-  <beee>
-        </beee>
+    <beee>
+    </beee>
+    <beee>
+    </beee>
 </hi>
 ```
 
-It is even possible to parse XML files without a root element:
+It will parse XML files without a root element just fine.
 
 ```sh
 $ head fixtures/oai.xml
 <record>
 <header>
- <identifier>oai:arXiv.org:0704.0004</identifier>
- <datestamp>2007-05-23</datestamp>
- <setSpec>math</setSpec>
+    <identifier>oai:arXiv.org:0704.0004</identifier>
+    <datestamp>2007-05-23</datestamp>
+    <setSpec>math</setSpec>
 </header>
 <metadata>
- <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"... >
- <dc:title>A determinant of Stirling cycle numbers counts ...
+    <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"... >
+    <dc:title>A determinant of Stirling cycle numbers counts ...
+...
 ```
 
 This is an example XML response from a web service. We can slice out the
-identifier elements (note, namespaces are ignored):
+identifier elements. Note any namespace - here `oai_dc` - is completely
+ignored for the sake of simplicity:
 
 ```sh
 $ cat fixtures/oai.xml | xmlcutty -root x -path /record/metadata/dc/identifier \
@@ -141,8 +146,9 @@ $ cat fixtures/oai.xml | xmlcutty -root x -path /record/metadata/dc/identifier \
 </x>
 ```
 
-We can go a bit further, with something like a poor man's XPath `text()`
-extraction:
+We can go a bit further and extract the text element, which is like a poor man
+`text()` in XPath terms. By using the a newline as argument to rename, we
+effectively get rid of the enclosing XML tag:
 
 ```sh
 $ cat fixtures/oai.xml | xmlcutty -rename '\n' -path /record/metadata/dc/identifier \
@@ -151,3 +157,5 @@ http://arxiv.org/abs/0704.0004
 http://arxiv.org/abs/0704.0010
 http://arxiv.org/abs/0704.0012
 ```
+
+This last feature is nice to quickly extract text from large XML files.
