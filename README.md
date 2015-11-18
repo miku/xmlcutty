@@ -133,7 +133,7 @@ $ head fixtures/oai.xml
 ```
 
 This is an example XML response from a web service. We can slice out the
-identifier elements. Note any namespace - here `oai_dc` - is completely
+identifier elements. Note that any namespace - here `oai_dc` - is completely
 ignored for the sake of simplicity:
 
 ```sh
