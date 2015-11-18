@@ -106,11 +106,11 @@ $ xmlcutty -rename beee -path /a/b fixtures/sample.xml
 All options, synthetic root element and a renamed path element:
 
 ```sh
-$ xmlcutty -root hi -rename beee -path /a/b/c fixtures/sample.xml | xmllint --format -
+$ xmlcutty -root hi -rename ceee -path /a/b/c fixtures/sample.xml | xmllint --format -
 <?xml version="1.0"?>
 <hi>
-    <beee></beee>
-    <beee></beee>
+    <ceee/>
+    <ceee/>
 </hi>
 ```
 
