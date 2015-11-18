@@ -119,16 +119,16 @@ It will parse XML files without a root element just fine.
 ```sh
 $ head fixtures/oai.xml
 <record>
-<header>
-    <identifier>oai:arXiv.org:0704.0004</identifier>
-    <datestamp>2007-05-23</datestamp>
-    <setSpec>math</setSpec>
-</header>
-<metadata>
-    <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"... >
-    <dc:title>A determinant of Stirling cycle numbers counts ...
-    <dc:type>text</dc:type>
-    <dc:identifier>http://arxiv.org/abs/0704.0004</dc:identifier>
+    <header>
+        <identifier>oai:arXiv.org:0704.0004</identifier>
+        <datestamp>2007-05-23</datestamp>
+        <setSpec>math</setSpec>
+    </header>
+    <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"... >
+            <dc:title>A determinant of Stirling cycle numbers counts ...
+            <dc:type>text</dc:type>
+            <dc:identifier>http://arxiv.org/abs/0704.0004</dc:identifier>
 ...
 ```
 
