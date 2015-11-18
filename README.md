@@ -7,6 +7,15 @@ xmlcutty is a simple tool for carving out elements from *large* XML files.
 
 Why? [Background](http://stackoverflow.com/q/33653844/89391).
 
+Install
+-------
+
+Use a deb or rpm [release](https://github.com/miku/xmlcutty/releases).
+
+Or install with the go tool:
+
+    $ go get github.com/miku/xmlcutty/cmd/xmlcutty
+
 Usage
 -----
 
