@@ -127,6 +127,8 @@ $ head fixtures/oai.xml
 <metadata>
     <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"... >
     <dc:title>A determinant of Stirling cycle numbers counts ...
+    <dc:type>text</dc:type>
+    <dc:identifier>http://arxiv.org/abs/0704.0004</dc:identifier>
 ...
 ```
 
