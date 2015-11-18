@@ -3,7 +3,9 @@ README
 
 > The game ain't in me no more. [None of it](https://www.youtube.com/watch?v=h7yf8Vp2KAI&feature=youtu.be&t=1m46s).
 
-xmlcutty is a simple tool for carving out elements from *large* XML files.
+xmlcutty is a simple tool for carving out elements from *large* XML files,
+*fast*. Since it works in a streaming fashion, it uses almost no memory and
+can process around 1G of XML per minute.
 
 Why? [Background](http://stackoverflow.com/q/33653844/89391).
 
