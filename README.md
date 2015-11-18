@@ -25,12 +25,10 @@ Usage
 $ cat fixtures/sample.xml
 <a>
     <b>
-        <c>
-        </c>
+        <c></c>
     </b>
     <b>
-        <c>
-        </c>
+        <c></c>
     </b>
 </a>
 ```
@@ -56,12 +54,10 @@ is only a simple matcher.
 $ xmlcutty -path /a fixtures/sample.xml
 <a>
     <b>
-        <c>
-        </c>
+        <c></c>
     </b>
     <b>
-        <c>
-        </c>
+        <c></c>
     </b>
 </a>
 ```
@@ -71,12 +67,10 @@ You specify a path, e.g. `/a/b` and all elements matching this path are printed:
 ```sh
 $ xmlcutty -path /a/b fixtures/sample.xml
 <b>
-    <c>
-    </c>
+    <c></c>
 </b>
 <b>
-    <c>
-    </c>
+    <c></c>
 </b>
 ```
 
@@ -89,27 +83,23 @@ $ xmlcutty -root hello -path /a/b fixtures/sample.xml | xmllint --format -
 <?xml version="1.0"?>
 <hello>
     <b>
-        <c>
-        </c>
+        <c></c>
     </b>
     <b>
-        <c>
-        </c>
+        <c></c>
     </b>
 </hello>
 ```
 
-Rename wrapper element on the fly:
+Rename wrapper element - that is the last element of the matching path:
 
 ```sh
 $ xmlcutty -rename beee -path /a/b fixtures/sample.xml
 <beee>
-    <c>
-    </c>
+    <c></c>
 </beee>
 <beee>
-    <c>
-    </c>
+    <c></c>
 </beee>
 ```
 
@@ -119,10 +109,8 @@ All options, synthetic root element and a renamed path element:
 $ xmlcutty -root hi -rename beee -path /a/b/c fixtures/sample.xml | xmllint --format -
 <?xml version="1.0"?>
 <hi>
-    <beee>
-    </beee>
-    <beee>
-    </beee>
+    <beee></beee>
+    <beee></beee>
 </hi>
 ```
 
@@ -151,9 +139,9 @@ $ cat fixtures/oai.xml | xmlcutty -root x -path /record/metadata/dc/identifier \
                        | xmllint --format -
 <?xml version="1.0"?>
 <x>
-  <identifier>http://arxiv.org/abs/0704.0004</identifier>
-  <identifier>http://arxiv.org/abs/0704.0010</identifier>
-  <identifier>http://arxiv.org/abs/0704.0012</identifier>
+    <identifier>http://arxiv.org/abs/0704.0004</identifier>
+    <identifier>http://arxiv.org/abs/0704.0010</identifier>
+    <identifier>http://arxiv.org/abs/0704.0012</identifier>
 </x>
 ```
 
