@@ -53,6 +53,13 @@ func main() {
 		reader = file
 	}
 
+	if *path == "/" {
+		if _, err := io.Copy(os.Stdout, reader); err != nil {
+			log.Fatal(err)
+		}
+		os.Exit(0)
+	}
+
 	stack := xmlcutty.StringStack{}
 	decoder := xml.NewDecoder(reader)
 
