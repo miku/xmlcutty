@@ -12,7 +12,8 @@ Why? [Background](http://stackoverflow.com/q/33653844/89391).
 Install
 -------
 
-Use a deb or rpm [release](https://github.com/miku/xmlcutty/releases).
+Use a deb or rpm [release](https://github.com/miku/xmlcutty/releases). It's in
+[AUR](https://aur.archlinux.org/packages/?K=xmlcutty), too.
 
 Or install with the go tool:
 
