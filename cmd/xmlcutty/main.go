@@ -80,8 +80,14 @@ func main() {
 	}
 
 	if *path == "/" {
+		if *root != "" {
+			fmt.Println("<" + *root + ">")
+		}
 		if _, err := io.Copy(os.Stdout, reader); err != nil {
 			log.Fatal(err)
+		}
+		if *root != "" {
+			fmt.Println("</" + *root + ">")
 		}
 		os.Exit(0)
 	}
