@@ -94,6 +94,7 @@ func main() {
 
 	stack := xmlcutty.StringStack{}
 	decoder := xml.NewDecoder(reader)
+	decoder.Strict = false
 
 	var opener, closer string
 	switch *rename {
