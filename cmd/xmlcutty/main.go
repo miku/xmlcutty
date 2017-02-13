@@ -39,7 +39,7 @@ import (
 )
 
 // Version of xmlcutty.
-const Version = "0.1.3"
+const Version = "0.1.4"
 
 type dummy struct {
 	Text []byte `xml:",innerxml"`

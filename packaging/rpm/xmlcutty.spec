@@ -1,6 +1,6 @@
 Summary:    Carve out subelements from large XML files with dumbed down xpath.
 Name:       xmlcutty
-Version:    0.1.3
+Version:    0.1.4
 Release:    0
 License:    MIT
 BuildArch:  x86_64
