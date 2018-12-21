@@ -108,8 +108,13 @@ func main() {
 		opener = " "
 		closer = " "
 	default:
-		opener = "<" + *rename + ">"
-		closer = "</" + *rename + ">"
+		if strings.HasPrefix(*rename, "\\n") {
+			opener = strings.Replace(*rename, "\\n", "\n", -1)
+			closer = ""
+		} else {
+			opener = "<" + *rename + ">"
+			closer = "</" + *rename + ">"
+		}
 	}
 
 	if *root != "" {
