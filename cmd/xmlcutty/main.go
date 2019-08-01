@@ -36,6 +36,7 @@ import (
 	"strings"
 
 	"github.com/miku/xmlcutty"
+	"golang.org/x/net/html/charset"
 )
 
 // Version of xmlcutty.
@@ -95,6 +96,7 @@ func main() {
 	stack := xmlcutty.StringStack{}
 	decoder := xml.NewDecoder(reader)
 	decoder.Strict = false
+	decoder.CharsetReader = charset.NewReaderLabel
 
 	var opener, closer string
 	switch *rename {
