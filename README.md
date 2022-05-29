@@ -17,7 +17,7 @@ Use a deb or rpm [release](https://github.com/miku/xmlcutty/releases). It's in
 
 Or install with the go tool:
 
-    $ go get github.com/miku/xmlcutty/cmd/xmlcutty
+    $ go install github.com/miku/xmlcutty/cmd/xmlcutty@latest
 
 Usage
 -----
