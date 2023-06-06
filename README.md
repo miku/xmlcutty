@@ -161,3 +161,7 @@ http://arxiv.org/abs/0704.0012
 ```
 
 This last feature is nice to quickly extract text from large XML files.
+
+## Misc/Citations
+
+* [Enabling Massive XML-Based Biological Data Management in HBase](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8712548)
