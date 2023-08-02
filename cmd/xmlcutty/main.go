@@ -1,6 +1,7 @@
 // Copyright 2015 by Leipzig University Library, http://ub.uni-leipzig.de
-//                   The Finc Authors, http://finc.info
-//                   Martin Czygan, <martin.czygan@uni-leipzig.de>
+//
+//	The Finc Authors, http://finc.info
+//	Martin Czygan, <martin.czygan@uni-leipzig.de>
 //
 // This file is part of some open source application.
 //
@@ -18,7 +19,6 @@
 // along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 //
 // @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
-//
 //
 // xmlcutty is a simple tool for carving out elements from large XML files,
 // fast. Since it works in a streaming fashion, it uses almost no memory and
@@ -42,6 +42,13 @@ import (
 // Version of xmlcutty.
 const Version = "0.1.5"
 
+var (
+	path    = flag.String("path", "/", "select path")
+	root    = flag.String("root", "", "synthetic root element")
+	rename  = flag.String("rename", "", "rename wrapper element to this name")
+	version = flag.Bool("v", false, "show version")
+)
+
 type dummy struct {
 	Text []byte `xml:",innerxml"`
 }
@@ -56,19 +63,16 @@ func lastElement(p string) string {
 }
 
 func main() {
-	path := flag.String("path", "/", "select path")
-	root := flag.String("root", "", "synthetic root element")
-	rename := flag.String("rename", "", "rename wrapper element to this name")
-	version := flag.Bool("v", false, "show version")
-
 	flag.Parse()
-
 	if *version {
 		fmt.Println(Version)
 		os.Exit(0)
 	}
-
-	var reader io.Reader
+	var (
+		reader io.Reader
+		bw     = bufio.NewWriter(os.Stdout)
+	)
+	defer bw.Flush()
 	if flag.NArg() < 1 {
 		reader = bufio.NewReader(os.Stdin)
 	} else {
@@ -79,26 +83,28 @@ func main() {
 		defer file.Close()
 		reader = file
 	}
-
 	if *path == "/" {
 		if *root != "" {
-			fmt.Println("<" + *root + ">")
+			fmt.Fprintln(bw, "<"+*root+">")
 		}
-		if _, err := io.Copy(os.Stdout, reader); err != nil {
+		if _, err := io.Copy(bw, reader); err != nil {
 			log.Fatal(err)
 		}
 		if *root != "" {
-			fmt.Println("</" + *root + ">")
+			fmt.Fprintln(bw, "</"+*root+">")
 		}
 		os.Exit(0)
 	}
-
-	stack := xmlcutty.StringStack{}
-	decoder := xml.NewDecoder(reader)
+	var (
+		stack   = xmlcutty.StringStack{}
+		decoder = xml.NewDecoder(reader)
+	)
 	decoder.Strict = false
 	decoder.CharsetReader = charset.NewReaderLabel
-
-	var opener, closer string
+	var (
+		opener string
+		closer string
+	)
 	switch *rename {
 	case "":
 		opener = "<" + lastElement(*path) + ">"
@@ -118,11 +124,9 @@ func main() {
 			closer = "</" + *rename + ">"
 		}
 	}
-
 	if *root != "" {
 		fmt.Println("<" + *root + ">")
 	}
-
 	for {
 		t, err := decoder.Token()
 		if err == io.EOF {
@@ -140,16 +144,15 @@ func main() {
 					log.Fatal(err)
 				}
 				stack.Pop()
-				fmt.Print(opener)
-				fmt.Print(string(d.Text))
-				fmt.Print(closer)
+				fmt.Fprint(bw, opener)
+				fmt.Fprint(bw, string(d.Text))
+				fmt.Fprint(bw, closer)
 			}
 		case xml.EndElement:
 			stack.Pop()
 		}
 	}
-
 	if *root != "" {
-		fmt.Println("</" + *root + ">")
+		fmt.Fprintln(bw, "</"+*root+">")
 	}
 }
