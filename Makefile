@@ -3,7 +3,7 @@ TARGETS = xmlcutty
 
 # http://docs.travis-ci.com/user/languages/go/#Default-Test-Script
 test:
-	go get -d && go test -v
+	go test -v ./...
 
 imports:
 	goimports -w .
