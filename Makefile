@@ -36,8 +36,8 @@ xmlcutty: cmd/xmlcutty/main.go
 # ==== packaging
 
 deb: $(TARGETS)
-	mkdir -p packaging/debian/xmlcutty/usr/sbin
-	cp $(TARGETS) packaging/debian/xmlcutty/usr/sbin
+	mkdir -p packaging/debian/xmlcutty/usr/local/bin
+	cp $(TARGETS) packaging/debian/xmlcutty/usr/local/bin
 	cd packaging/debian && fakeroot dpkg-deb --build xmlcutty .
 	mv packaging/debian/xmlcutty*deb .
 

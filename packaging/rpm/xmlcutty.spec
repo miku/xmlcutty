@@ -24,11 +24,11 @@ The game ain't in me no more.
 
 %install
 # create directories where the files will be located
-mkdir -p $RPM_BUILD_ROOT/usr/local/sbin
+mkdir -p $RPM_BUILD_ROOT/usr/local/bin
 
 # put the files in to the relevant directories.
 # the argument on -m is the permissions expressed as octal. (See chmod man page for details.)
-install -m 755 xmlcutty $RPM_BUILD_ROOT/usr/local/sbin
+install -m 755 xmlcutty $RPM_BUILD_ROOT/usr/local/bin
 
 %post
 # the post section is where you can run commands after the rpm is installed.
@@ -42,7 +42,7 @@ rm -rf %{_topdir}/BUILD/%{name}
 # list files owned by the package here
 %files
 %defattr(-,root,root)
-/usr/local/sbin/xmlcutty
+/usr/local/bin/xmlcutty
 
 
 %changelog
